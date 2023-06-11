@@ -1,68 +1,146 @@
 # TesteDev
 
-Este é um projeto de exemplo para fins de teste e desenvolvimento.
+# 🛠️ Funcionalidades do projeto
 
-## Instalação
+- `1°` `Obter informações de um usuário específico`: Obtém informações detalhadas de um usuário com base no seu ID.
+- `2°` `Obter a lista de usuários`: Retorna a lista completa de usuários cadastrados no sistema.
+- `3°` `Obter a quantidade de acessos de um usuário específico`: Retorna a quantidade de acessos de um usuário com base no seu ID.
+- `4°` `Criar um novo usuário`: Cria um novo usuário no sistema.
+- `5°` `Atualizar informações de um usuário`: Atualiza as informações de um usuário com base no seu ID.
+- `6°` `Deletar um usuário`: Exclui um usuário do sistema.
 
-Para executar este projeto, você precisará ter o Node.js instalado em seu ambiente de desenvolvimento. Em seguida, você pode escolher entre o Yarn ou o npm para instalar as dependências.
+## 📁 Como rodar o projeto?
 
-### Instalando dependências com Yarn
+### Pré-requisitos
+- Node.js instalado em seu ambiente de desenvolvimento.
+- Um gerenciador de pacotes como NPM ou Yarn.
 
-```bash
-yarn install
+### Configurações de ambiente
+1. Clone este repositório:
+```shell
+$ git clone git@github.com:bcocheto/vagas.git
 ```
 
-### Instalando dependências com npm
-
-```bash
-npm install
+2. Acesse a pasta do projeto no terminal/cmd:
+```shell
+$ cd vagas
 ```
 
-## Executando o projeto
-
-Existem alguns scripts configurados para ajudá-lo a executar o projeto.
-
-### Executando em modo de desenvolvimento
-
-```bash
-yarn dev
+3. Instale as dependências:
+```shell
+$ npm install
 ```
-
 ou
-
-```bash
-npm run dev
+```shell
+$ yarn
 ```
 
-Este comando iniciará o servidor Express em modo de desenvolvimento usando o Nodemon. Isso significa que o servidor será reiniciado automaticamente sempre que você fizer alterações nos arquivos.
-
-### Executando em modo de produção
-
-```bash
-yarn start
+4. Inicie o projeto:
+```shell
+$ npm run dev
 ```
-
 ou
-
-```bash
-npm start
+```shell
+$ yarn dev
 ```
 
-Este comando iniciará o servidor Express em modo de produção.
+A aplicação estará disponível em `http://localhost:3000`.
 
-### Compilando o código TypeScript
+## Documentação das rotas
 
-```bash
-yarn build
+### Obter informações de um usuário específico
+
+- **URL:** `/user/:id`
+- **Método:** GET
+
+Essa rota permite obter informações detalhadas de um usuário específico com base no seu ID.
+
+Exemplo de requisição:
+
+```
+GET /user/1
 ```
 
-ou
+### Obter a lista de usuários
 
-```bash
-npm run build
+- **URL:** `/users`
+- **Método:** GET
+
+Essa rota retorna a lista completa de usuários cadastrados no sistema.
+
+Exemplo de requisição:
+
+```
+GET /users
 ```
 
-Este comando compilará o código TypeScript para JavaScript e o colocará na pasta `dist`.
+### Obter a quantidade de acessos de um usuário específico
+
+- **URL:** `/user/access/:id`
+- **Método:** GET
+
+Essa rota retorna a quantidade de acessos de um usuário específico com base no seu ID.
+
+Exemplo de requisição:
+
+```
+GET /user/access/1
+```
+
+### Criar um novo usuário
+
+- **URL:** `/users`
+- **Método:** POST
+
+Essa rota permite criar um novo usuário no sistema.
+
+Exemplo de requisição:
+
+```
+POST /users
+
+Body:
+{
+  "name": "John Doe",
+  "job": "Developer"
+}
+```
+
+### Atualizar informações de um usuário
+
+- **URL:** `/user/:id`
+- **Método:** PUT
+
+Essa rota permite atualizar informações de um usuário específico com base no seu ID.
+
+Exemplo de requisição:
+
+```
+PUT /user/1
+
+Body:
+{
+  "name": "John Doe",
+  "job": "Senior Developer"
+}
+```
+
+### Deletar um usuário
+
+- **URL:** `/user/:id`
+- **Método:** DELETE
+
+Essa rota permite excluir um usuário específico com base no seu ID.
+
+Exemplo de
+
+ requisição:
+
+```
+DELETE /user/1
+```
+
+Lembre-se de substituir `:id` pelo ID real do usuário desejado.
 
 ## Pacotes utilizados
 
@@ -76,6 +154,14 @@ Este comando compilará o código TypeScript para JavaScript e o colocará na pa
 
 Certifique-se de verificar os arquivos `package.json` e `package-lock.json` para obter as versões mais recentes dos pacotes utilizados.
 
-## Licença
+## Utilizando as rotas no Postman
 
-Este projeto está licenciado sob a Licença ISC. Veja o arquivo `LICENSE` para obter mais detalhes.
+Você pode importar as rotas do projeto para o Postman utilizando o arquivo "Vaga.postman.json". Para fazer isso, siga as etapas abaixo:
+
+1. Abra o Postman.
+2. Clique no botão "Import" no canto superior esquerdo.
+3. Selecione a opção "Import From File".
+4. Navegue até o diretório onde o projeto está localizado e selecione o arquivo "Vaga.postman.json".
+5. Clique no botão "Import" para importar as rotas para o Postman.
+
+Agora você terá todas as rotas disponíveis no projeto no Postman, prontas para serem testadas. Certifique-se de fazer as alterações necessárias nas requisições, como a substituição do ID do usuário e o envio dos dados corretos no corpo da requisição.

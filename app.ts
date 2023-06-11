@@ -24,12 +24,15 @@ app.use(express.static(__dirname + "/public"));
 
 app.get("/", (req: Request, res: Response) => {
   res.send(`
-    get /user/access:id </br>
-    get /user/:id </br>
-    get /users </br>
-    post /users </br>
-    put /user/:id </br>
-    delete /user/:id </br>
+    <h1>TesteDev API</h1>
+    <ul>
+      <li><a href="/users">GET /users</a></li>
+      <li><a href="/user/:id">GET /user/:id</a></li>
+      <li><a href="/user/access/:id">GET /user/access/:id</a></li>
+      <li><a href="/users">POST /users</a></li>
+      <li><a href="/user/:id">PUT /user/:id</a></li>
+      <li><a href="/user/:id">DELETE /user/:id</a></li>
+    </ul>
   `);
 });
 
