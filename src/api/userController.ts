@@ -2,24 +2,35 @@ import { Request, Response, NextFunction } from "express";
 import { fakeData } from "../data/fakeData";
 import { User } from "../types/user";
 
+let userAccessCount: { [key: string]: number } = {};
+
+const incrementUserAccessCount = (userId: number) => {
+  if (userAccessCount[userId]) {
+    userAccessCount[userId]++;
+  } else {
+    userAccessCount[userId] = 1;
+  }
+};
+
 export const getUser = (req: Request, res: Response, next: NextFunction) => {
-  const { name } = req.query;
+  const { id } = req.params;
   const user: User | undefined = fakeData.find(
-    (user: User) => user.name === name
+    (user: User) => user.id === Number(id)
   );
 
   if (!user) {
     return res.status(404).send("User not found");
   }
 
+  incrementUserAccessCount(user.id);
+  
   res.json(user);
 };
 
-export const getUsers = (req: Request, res: Response, next: NextFunction) => {
+export const getUsers = (req: Request, res: Response, _next: NextFunction) => {
   res.json(fakeData);
 };
 
-let userAccessCount: { [key: string]: number } = {};
 
 export const createUser = (req: Request, res: Response) => {
   const { name, job, permissions } = req.body;
@@ -39,13 +50,10 @@ export const createUser = (req: Request, res: Response) => {
   res.status(201).json(newUser);
 };
 
-
-
-
 export const deleteUser = (req: Request, res: Response, next: NextFunction) => {
-  const { name } = req.query;
+  const { id } = req.params;
 
-  const index = fakeData.findIndex((user: User) => user.name === name);
+  const index = fakeData.findIndex((user: User) => user.id === Number(id));
 
   if (index === -1) {
     res.status(404).send("User not found");
@@ -55,29 +63,38 @@ export const deleteUser = (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export const updateUser = (req: Request, res: Response, next: NextFunction) => {
-  const { id } = req.query;
-  const { name, job } = req.body;
+export const updateUser = (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { name, job, permissions } = req.body;
 
-  const user = fakeData.find((d: User) => d.id === Number(id));
+  const user = fakeData.find((u: User) => u.id === Number(id));
 
   if (!user) {
-    res.status(404).send("User not found");
-  } else {
-    user.name = name;
-    user.job = job;
-
-    res.send(user);
+    return res.status(404).send(req);
   }
+
+  user.name = name;
+  user.job = job;
+  user.permissions = permissions;
+
+  res.send(user);
 };
 
 export const getUserAccessCount = (
   req: Request,
   res: Response,
-  next: NextFunction
+  _next: NextFunction
 ) => {
-  const { name } = req.query;
-  const count = userAccessCount[name as string] || 0;
+  const { id } = req.params;
+  const userId = Number(id);
 
-  res.send(`Usuário ${name} foi lido ${count} vezes.`);
+  const user = fakeData.find((user: User) => user.id === userId);
+
+  if (!user) {
+    return res.status(404).send("User not found");
+  }
+
+  const count = userAccessCount[userId] || 0;
+
+  res.send(`Usuário com ID ${userId} foi lido ${count} vezes.`);
 };

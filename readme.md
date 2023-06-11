@@ -1,43 +1,81 @@
-# Este é um teste para desenvolvedores
+# TesteDev
 
-# possui 5 testes
+Este é um projeto de exemplo para fins de teste e desenvolvimento.
 
-## Introdução
+## Instalação
 
-Este projeto possui um banco de dados fake em fakeData.js com apenas um registro.
-A ideia é melhorar e o CRUD escrito nos 4 arquivos de teste abaixo.
+Para executar este projeto, você precisará ter o Node.js instalado em seu ambiente de desenvolvimento. Em seguida, você pode escolher entre o Yarn ou o npm para instalar as dependências.
 
-Será a validada a forma de escrita de código.
-Escreva códigos que humanos consigam entender.
+### Instalando dependências com Yarn
 
-Fique a vontade para fazer modificaçoes nos serviços, comentários em código, estrutura, mas seja objetivo.
+```bash
+yarn install
+```
 
-## teste1.js
+### Instalando dependências com npm
 
-GET em /user 
+```bash
+npm install
+```
 
-Possuimos neste arquivo um serviço que faz uma busca no banco fake e retorna um registro.
-Este código funciona, mas é possivel melhorar.
-Veja o que pode deixar ele melhor escrito e mais performatico.
+## Executando o projeto
 
-## teste2.js
+Existem alguns scripts configurados para ajudá-lo a executar o projeto.
 
-POST em /users, descubra a intenção dele e o corrija.
+### Executando em modo de desenvolvimento
 
-## teste3.js
+```bash
+yarn dev
+```
 
-Este procura um usuário e o deleta da base.
-Retorne sucesso para o client caso realmente tenha sido excluido e deixe o código mais performatico.
+ou
 
-## teste4.js
+```bash
+npm run dev
+```
 
-Atualiza os dados de um usuário especifico.
+Este comando iniciará o servidor Express em modo de desenvolvimento usando o Nodemon. Isso significa que o servidor será reiniciado automaticamente sempre que você fizer alterações nos arquivos.
 
-## teste5.js
+### Executando em modo de produção
 
-Retorne quantas vezes determinado usuário foi lido no teste1.
+```bash
+yarn start
+```
 
-## teste 6
+ou
 
-Definina uma forma de criar permissão para o usuario, defina se o usuário pode deletar ou atualizar usuários. Crie um middleware para validar essas permissões e adicione no teste4 e teste3.
+```bash
+npm start
+```
 
+Este comando iniciará o servidor Express em modo de produção.
+
+### Compilando o código TypeScript
+
+```bash
+yarn build
+```
+
+ou
+
+```bash
+npm run build
+```
+
+Este comando compilará o código TypeScript para JavaScript e o colocará na pasta `dist`.
+
+## Pacotes utilizados
+
+- Express: 4.18.2
+- body-parser: 1.20.2
+- TypeScript: 5.1.3
+- ts-node: 10.9.1
+- nodemon: 2.0.22
+- @types/express: 4.17.17
+- @types/node: 20.3.0
+
+Certifique-se de verificar os arquivos `package.json` e `package-lock.json` para obter as versões mais recentes dos pacotes utilizados.
+
+## Licença
+
+Este projeto está licenciado sob a Licença ISC. Veja o arquivo `LICENSE` para obter mais detalhes.

@@ -1,6 +1,5 @@
 import express, { Express, Request, Response } from "express";
 import bodyParser from "body-parser";
-
 import {
   getUser,
   getUsers,
@@ -25,22 +24,24 @@ app.use(express.static(__dirname + "/public"));
 
 app.get("/", (req: Request, res: Response) => {
   res.send(`
-    get user/ </br>
-    get users/ </br>
-    post users/ </br>
-    delete users/ </br>
-    put users/ </br>
+    get /user/access:id </br>
+    get /user/:id </br>
+    get /users </br>
+    post /users </br>
+    put /user/:id </br>
+    delete /user/:id </br>
   `);
 });
 
-app.get("/user", getUser);
+app.get("/user/:id", getUser);
 app.get("/users", getUsers);
+app.get("/user/access/:id", getUserAccessCount);
 app.post("/users", createUser);
-app.delete("/users", checkPermissions("delete"), deleteUser);
-app.put("/users", checkPermissions("update"), updateUser);
-app.get("/users/access", getUserAccessCount);
+app.put("/user/:id", checkPermissions("update"), updateUser);
+app.delete("/user/:id", checkPermissions("delete"), deleteUser);
 
 const port = 3000;
+
 app.listen(port, () => {
   console.log(`Express server listening on port ${port}`);
 });
